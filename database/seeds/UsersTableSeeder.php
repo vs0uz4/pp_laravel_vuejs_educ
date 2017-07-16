@@ -15,5 +15,10 @@ class UsersTableSeeder extends Seeder
             'name'  => 'Administrator',
             'email' => 'admin@user.com'
         ]);
+
+        factory(SiGeEdu\User::class)->create([
+            'name'  => 'vSouza',
+            'email' => 'vitor.rodrigues@gmail.com'
+        ]);
     }
 }
