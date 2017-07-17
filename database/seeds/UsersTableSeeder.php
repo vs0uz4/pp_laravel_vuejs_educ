@@ -11,12 +11,12 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(SiGeEdu\User::class)->create([
+        factory(\SiGeEdu\Models\User::class)->create([
             'name'  => 'Administrator',
             'email' => 'admin@user.com'
         ]);
 
-        factory(SiGeEdu\User::class)->create([
+        factory(\SiGeEdu\Models\User::class)->create([
             'name'  => 'vSouza',
             'email' => 'vitor.rodrigues@gmail.com'
         ]);

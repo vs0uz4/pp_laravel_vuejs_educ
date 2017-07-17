@@ -67,7 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => SiGeEdu\User::class,
+            'model' => \SiGeEdu\Models\User::class,
         ],
 
         // 'users' => [
