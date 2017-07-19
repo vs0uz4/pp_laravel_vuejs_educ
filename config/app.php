@@ -173,6 +173,7 @@ return [
          * Vendor's Service Providers...
          */
         Kris\LaravelFormBuilder\FormBuilderServiceProvider::class,
+        Bootstrapper\BootstrapperL5ServiceProvider::class,
 
 
         /*
@@ -237,6 +238,8 @@ return [
          * Vendor's Facades...
          */
         'FormBuilder' => Kris\LaravelFormBuilder\Facades\FormBuilder::class,
+        'Button' => Bootstrapper\Facades\Button::class,
+        'Table' => Bootstrapper\Facades\Table::class,
 
     ],
 
