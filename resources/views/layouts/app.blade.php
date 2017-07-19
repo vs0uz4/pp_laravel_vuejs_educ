@@ -14,6 +14,13 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
+    <!-- TODO Remove and implements in external css class -->
+    <style>
+        .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
+            vertical-align: middle; !important;
+        }
+    </style>
+
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
