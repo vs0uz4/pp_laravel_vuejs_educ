@@ -5,10 +5,10 @@
         <div class="row">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3>Users</h3>
+                    <h3><span class="glyphicon glyphicon-user"></span> Users</h3>
                 </div>
                 <div class="panel-body">
-                    {!! Button::primary('New User')->asLinkTo(route('admin.users.create')) !!}
+                    {!! Button::success('New User')->prependIcon(Icon::plusSign())->asLinkTo(route('admin.users.create')) !!}
                 </div>
 
                 {!!
@@ -20,7 +20,7 @@
                             $linkEdit = route('admin.users.edit', ['user' => $row->id, 'page' => $page]);
                             $linkShow = route('admin.users.show', ['user' => $row->id, 'page' => $page]);
 
-                            return Button::link('Edit')->asLinkTo($linkEdit). '|' . Button::link('View')->asLinkTo($linkShow);
+                            return Button::link('Edit')->prependIcon(Icon::edit())->asLinkTo($linkEdit). '|' . Button::link('View')->prependIcon(Icon::eyeOpen())->asLinkTo($linkShow);
                         })
                 !!}
             </div>

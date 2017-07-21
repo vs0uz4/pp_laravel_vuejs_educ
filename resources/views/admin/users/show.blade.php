@@ -5,7 +5,7 @@
         <div class="row">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3>View User</h3>
+                    <h3><span class="glyphicon glyphicon-user"></span> View User</h3>
                 </div>
                 <div class="panel-body">
                     @php
@@ -22,10 +22,10 @@
                         ])
                     @endphp
 
-                    {!! Button::normal('Back')->asLinkTo($linkBack) !!}
-                    {!! Button::warning('Edit')->asLinkTo($linkEdit) !!}
+                    {!! Button::normal('Back')->prependIcon(Icon::chevronLeft())->asLinkTo($linkBack) !!}
+                    {!! Button::success('Edit')->prependIcon(Icon::edit())->asLinkTo($linkEdit) !!}
                     {!!
-                        Button::danger('Delete')->asLinkTo($linkDelete)
+                        Button::danger('Delete')->prependIcon(Icon::removeSign())->asLinkTo($linkDelete)
                             ->addAttributes([
                                 'onclick' => "event.preventDefault();document.getElementById(\"form-delete\").submit();"
                             ])

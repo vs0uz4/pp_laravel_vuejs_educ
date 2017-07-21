@@ -14,13 +14,6 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <!-- TODO Remove and implements in external css class -->
-    <style>
-        .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
-            vertical-align: middle; !important;
-        }
-    </style>
-
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
@@ -50,11 +43,13 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ route('auth.login') }}">Login</a></li>
+                            @if (!Route::is('auth.login'))
+                                <li><a href="{{ route('auth.login') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                            @endif
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    <span class="glyphicon glyphicon-user"></span> {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
@@ -62,7 +57,7 @@
                                         <a href="{{ route('auth.logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            Logout
+                                            <span class="glyphicon glyphicon-log-out"></span> Logout
                                         </a>
 
                                         <form id="logout-form" action="{{ route('auth.logout') }}" method="POST" style="display: none;">

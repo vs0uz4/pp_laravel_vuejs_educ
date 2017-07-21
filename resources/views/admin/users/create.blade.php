@@ -3,13 +3,19 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <h3>New User</h3>
-            {!!
-                form($form
-                    ->add('btn_save','submit', ['attr' => ['class' => 'btn btn-primary'], 'label' => 'Save'])
-                    ->add('btn_cancel', 'button', ['attr' => ['class' => 'btn btn-default'], 'label' => 'Cancel'])
-                )
-            !!}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3><span class="glyphicon glyphicon-user"></span> New User</h3>
+                </div>
+                <div class="panel-body">
+                    {!!
+                        form($form
+                            ->add('btn_cancel', 'button', ['attr' => ['class' => 'btn btn-default', 'onclick' => 'event.preventDefault();history.back();'], 'label' => '<span class="glyphicon glyphicon-chevron-left"></span> Cancel'])
+                            ->add('btn_save','submit', ['attr' => ['class' => 'btn btn-primary'], 'label' => '<span class="glyphicon glyphicon-ok-sign"></span> Save'])
+                        )
+                    !!}
+                </div>
+            </div>
         </div>
     </div>
 @endsection

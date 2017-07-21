@@ -63,7 +63,7 @@
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
-                                    Reset Password
+                                    <span class="glyphicon glyphicon-refresh"></span> Reset Password
                                 </button>
                             </div>
                         </div>
