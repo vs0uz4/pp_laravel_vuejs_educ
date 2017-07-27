@@ -15,67 +15,68 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
+        @php
+            $navbar = Navbar::withBrand('<span class=\'glyphicon glyphicon-education\'></span> ' . config('app.name'), route('admin.dashboard') );
 
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+            if(Auth::check()){
+                $links = [
+                    ['link' => route('admin.users.index'),  'title' => '<span class=\'glyphicon glyphicon-user\'></span> Users'],
+                    ['link' => route('admin.systeminfo'),   'title' => '<span class=\'glyphicon glyphicon-info-sign\'></span> System Info'],
+                ];
 
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
-                </div>
+                $linksRight = [
+                    [
+                        '<span class="glyphicon glyphicon-user"></span> ' . Auth::user()->name,
+                        [
+                            [
+                                'link' => route('auth.logout'),
+                                'title' => '<span class="glyphicon glyphicon-log-out"></span> Logout',
+                                'linkAttributes' => [
+                                    'onclick' => "event.preventDefault(); document.getElementById(\"form-logout\").submit();"
+                                ],
+                            ]
 
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
+                        ]
+                    ]
+                ];
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            @if (!Route::is('auth.login'))
-                                <li><a href="{{ route('auth.login') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                            @endif
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    <span class="glyphicon glyphicon-user"></span> {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
+                $navbar->withContent(Navigation::links($links))
+                       ->withContent(Navigation::links($linksRight)
+                       ->right());
 
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{{ route('auth.logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            <span class="glyphicon glyphicon-log-out"></span> Logout
-                                        </a>
+                $formLogout = FormBuilder::plain([
+                    'id'     => 'form-logout',
+                    'url'    => route('auth.logout'),
+                    'method' => 'POST',
+                    'style'  => 'display:none'
+                ]);
+            }else{
+                $linksRight = [
+                    ['link' => route('auth.login'),  'title' => '<span class=\'glyphicon glyphicon-log-in\'></span> Login'],
+                ];
 
-                                        <form id="logout-form" action="{{ route('auth.logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endif
-                    </ul>
-                </div>
+                $navbar->withContent(Navigation::links($linksRight)->right());
+            }
+        @endphp
+        {!! $navbar !!}
+
+        @if(Auth::check())
+            {!! form($formLogout) !!}
+        @endif
+        <div class="container">
+            <div class="row">
+                @include('flash::message')
             </div>
-        </nav>
+        </div>
 
         @yield('content')
     </div>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+
+    <script>
+        $('#flash-overlay-modal').modal();
+    </script>
 </body>
 </html>
