@@ -34,26 +34,17 @@ Route::group(['prefix' => 'admin'], function (){
         Route::get('password/reset/{token}','ResetPasswordController@showResetForm')->name('password.reset');
         Route::post('password/reset',       'ResetPasswordController@reset');
     });
-/*
-|        | GET|HEAD  | admin/login                  | login               | SiGeEdu\Http\Controllers\Auth\LoginController@showLoginForm                | web,guest    |
-|        | POST      | admin/login                  |                     | SiGeEdu\Http\Controllers\Auth\LoginController@login                        | web,guest    |
-|        | POST      | admin/logout                 | logout              | SiGeEdu\Http\Controllers\Auth\LoginController@logout                       | web          |
-
-|        | POST      | admin/password/email         | password.email      | SiGeEdu\Http\Controllers\Auth\ForgotPasswordController@sendResetLinkEmail  | web,guest    |
-|        | POST      | admin/password/reset         |                     | SiGeEdu\Http\Controllers\Auth\ResetPasswordController@reset                | web,guest    |
-|        | GET|HEAD  | admin/password/reset         | password.request    | SiGeEdu\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm | web,guest    |
-|        | GET|HEAD  | admin/password/reset/{token} | password.reset      | SiGeEdu\Http\Controllers\Auth\ResetPasswordController@showResetForm        | web,guest    |
-
-|        | POST      | admin/register               |                     | SiGeEdu\Http\Controllers\Auth\RegisterController@register                  | web,guest    |
-|        | GET|HEAD  | admin/register               | register            | SiGeEdu\Http\Controllers\Auth\RegisterController@showRegistrationForm      | web,guest    |
-*/
-
 
     Route::group(['namespace'=>'Admin\\', 'as'=>'admin.', 'middleware'=>'auth'], function(){
         // Support Route...
-        Route::get('/sysinfo', function() {
-            return 'System Informations...';
-        });
+        Route::get('/sysinfo', function(){
+            return view('admin.systeminfo');
+        })->name('systeminfo');
+
+        // Dashboard Route...
+        Route::get('/dashboard', function(){
+            return view('admin.dashboard');
+        })->name('dashboard');
 
         // Users Route..
         Route::resource('users', 'UsersController');
