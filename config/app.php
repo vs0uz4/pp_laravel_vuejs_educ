@@ -174,7 +174,7 @@ return [
          */
         Kris\LaravelFormBuilder\FormBuilderServiceProvider::class,
         Bootstrapper\BootstrapperL5ServiceProvider::class,
-
+        Laracasts\Flash\FlashServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -241,6 +241,8 @@ return [
         'Button' => Bootstrapper\Facades\Button::class,
         'Table' => Bootstrapper\Facades\Table::class,
         'Icon' => Bootstrapper\Facades\Icon::class,
+        'Navbar' => Bootstrapper\Facades\Navbar::class,
+        'Navigation' => Bootstrapper\Facades\Navigation::class,
 
     ],
 
