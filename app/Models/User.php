@@ -21,7 +21,7 @@ class User extends Authenticatable implements TableInterface
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'enrolment',
+        'enrolment', 'name', 'email', 'password',
     ];
 
     /**
@@ -83,7 +83,7 @@ class User extends Authenticatable implements TableInterface
      */
     public function getTableHeaders()
     {
-        return ['ID', 'Name', 'Email'];
+        return ['ID', 'Enrolment', 'Name', 'Email'];
     }
 
     /**
@@ -98,6 +98,8 @@ class User extends Authenticatable implements TableInterface
         switch ($header){
             case 'ID':
                 return $this->id;
+            case 'Enrolment':
+                return $this->enrolment;
             case 'Name':
                 return $this->name;
             case 'Email':

@@ -14,6 +14,7 @@
                 {!!
                     Table::withContents($users->items())
                         ->hover()
+                        ->ignore(['Enrolment'])
                         ->withClassOnCellsInColumn(['ID','Actions'], 'text-center')
                         ->callback('Actions', function ($field, $row){
                             (!$_REQUEST) ? $page = 1 : $page = $_REQUEST['page'];
