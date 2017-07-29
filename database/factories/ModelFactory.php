@@ -18,6 +18,7 @@ $factory->define(\SiGeEdu\Models\User::class, function (Faker\Generator $faker) 
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
+        'enrolment' => $faker->unique()->randomNumber(6),
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
     ];

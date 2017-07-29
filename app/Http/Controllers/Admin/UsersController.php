@@ -69,12 +69,10 @@ class UsersController extends Controller
                 ->withInput();
         }
 
-        $password = str_random(6);
         $data = $form->getFieldValues();
-        $data['password'] = $password;
+        $user = $this->user->createFully($data);
 
-        $user = $this->user->create($data);
-
+        flash('User created with success!')->success()->important();
         return redirect(route('admin.users.index'));
     }
 
@@ -141,6 +139,7 @@ class UsersController extends Controller
         $data = $form->getFieldValues();
         $user->update($data);
 
+        flash('User changed with success!')->success()->important();
         return redirect(route('admin.users.index', ['page' => $currentPage]));
     }
 
@@ -155,6 +154,7 @@ class UsersController extends Controller
         $user = $this->user->find($id);
         $user->delete();
 
+        flash('User deleted with success!')->success()->important();
         return redirect()->route('admin.users.index');
     }
 }
