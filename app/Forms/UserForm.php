@@ -26,6 +26,11 @@ class UserForm extends Form
                     'placeholder' => 'Enter the e-mail'
                 ],
                 'rules'=> 'required|max:255|unique:users,email,' . $id
+            ])
+            ->add('send_notification', 'checkbox', [
+                'label' => 'Send welcome notification e-mail',
+                'value' => true,
+                'checked' => false
             ]);
     }
 }

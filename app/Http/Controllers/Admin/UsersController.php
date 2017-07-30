@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use SiGeEdu\Models\User;
 use SiGeEdu\Forms\UserForm;
 use SiGeEdu\Http\Controllers\Controller;
+use SiGeEdu\Notifications\UserCreated;
 
 class UsersController extends Controller
 {
@@ -71,6 +72,11 @@ class UsersController extends Controller
 
         $data = $form->getFieldValues();
         $user = $this->user->createFully($data);
+
+        if (isset($data['send_notification'])){
+            $token = \Password::broker()->createToken($user);
+            $user->notify(new UserCreated($token));
+        }
 
         flash('User created with success!')->success()->important();
         return redirect(route('admin.users.index'));
