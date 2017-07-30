@@ -47,6 +47,9 @@ Route::group(['prefix' => 'admin'], function (){
         })->name('dashboard');
 
         // Users Route..
+        Route::group(['prefix' => 'users', 'as' => 'users.'], function(){
+            Route::get('show_details', 'UsersController@showDetails')->name('show_details');
+        });
         Route::resource('users', 'UsersController');
     });
 

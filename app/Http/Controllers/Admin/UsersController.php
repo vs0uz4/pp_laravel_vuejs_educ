@@ -56,9 +56,10 @@ class UsersController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(Request $request)
     {
         /** @var Form $form */
         $form = \FormBuilder::create(UserForm::class);
@@ -71,15 +72,23 @@ class UsersController extends Controller
         }
 
         $data = $form->getFieldValues();
-        $user = $this->user->createFully($data);
+        $result = $this->user->createFully($data);
+
+        $user = $result['user'];
+        $password = $result['password'];
 
         if (isset($data['send_notification'])){
             $token = \Password::broker()->createToken($user);
             $user->notify(new UserCreated($token));
         }
 
+        $request->session()->flash('user_created', [
+            'id' => $user->id,
+            'password' => $password
+        ]);
+
         flash('User created with success!')->success()->important();
-        return redirect(route('admin.users.index'));
+        return redirect(route('admin.users.show_details'));
     }
 
     /**
@@ -94,6 +103,20 @@ class UsersController extends Controller
         //$user = $this->user->paginate();
 
         return view('admin.users.show', compact('user'));
+    }
+
+
+    /**
+     * Display the details for specified resource.
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showDetails(){
+        $userData = session('user_created');
+
+        $user = $this->user->findOrFail($userData['id']);
+        $user->password = $userData['password'];
+
+        return view('admin.users.show_details', compact('user'));
     }
 
     /**

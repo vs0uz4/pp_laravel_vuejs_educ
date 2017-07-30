@@ -63,7 +63,8 @@
         @if(Auth::check())
             {!! form($formLogout) !!}
         @endif
-        <div class="container">
+
+        <div class="container hidden-print">
             <div class="row">
                 @include('flash::message')
             </div>
