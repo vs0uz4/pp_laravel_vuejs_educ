@@ -36,7 +36,11 @@
                 {!!
                     Table::withContents([$user])
                         ->ignore(['ID'])
-                        ->withClassOnCellsInColumn(['Enrolment', 'Created At', 'Updated At'], 'text-center')
+                        ->withClassOnCellsInColumn(['Enrolment', 'Type', 'Created At', 'Updated At'], 'text-center')
+                        ->callback('Type', function ($field, $row){
+                            $type = explode('\\', $row->userable_type );
+                            return $type[2];
+                        })
                         ->callback('Created At', function ($field, $row) {
                             return $row->created_at->diffForHumans();
                         })
