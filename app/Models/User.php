@@ -21,7 +21,7 @@ class User extends Authenticatable implements TableInterface
      * @var array
      */
     protected $fillable = [
-        'enrolment', 'name', 'email', 'password',
+        'name', 'email', 'password', 'enrolment',
     ];
 
     /**
@@ -32,6 +32,13 @@ class User extends Authenticatable implements TableInterface
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     */
+    public function userable(){
+        return $this->morphTo();
+    }
 
     /**
      * @param $data
@@ -45,7 +52,8 @@ class User extends Authenticatable implements TableInterface
         $data['enrolment'] = $enrolment;
 
         $user = parent::create($data);
-        self::assignEnrolment($user, self::ROLE_ADMIN);
+        self::assignEnrolment($user, $data['type']);
+        self::assignRole($user, $data['type']);
         $user->save();
 
         return compact('user', 'password');
@@ -66,6 +74,22 @@ class User extends Authenticatable implements TableInterface
         $user->enrolment = $types[$type] + $user->id;
 
         return $user->enrolment;
+    }
+
+    /**
+     * @param User $user
+     * @param $type
+     */
+    public static function assignRole(User $user, $type){
+        $types = [
+            self::ROLE_ADMIN   => Administrator::class,
+            self::ROLE_TEACHER => Teacher::class,
+            self::ROLE_STUDENT => Student::class,
+        ];
+
+        $model = $types[$type];
+        $model = $model::create([]);
+        $user->userable()->associate($model);
     }
 
     /**
