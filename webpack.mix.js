@@ -1,4 +1,5 @@
-const { mix } = require('laravel-mix');
+const { mix } = require('laravel-mix')
+const webpack = require('webpack')
 
 /*
  |--------------------------------------------------------------------------
@@ -11,5 +12,23 @@ const { mix } = require('laravel-mix');
  |
  */
 
+/*
+ Webpack Configurations
+ Defining through webpack plugin provider settings, so that the jQuery library stays in the global scope.
+
+ jQuery will be available globally through the variables: '$' and 'jQuery'
+ */
+mix.webpackConfig({
+    plugins: [
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery"
+        })
+    ]
+})
+
+mix.sass('resources/assets/sass/app.scss', 'public/css')
+
 mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css');
+    .sourceMaps()
+    .extract(['jquery', 'bootstrap-sass'])
