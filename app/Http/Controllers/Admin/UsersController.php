@@ -100,8 +100,6 @@ class UsersController extends Controller
     public function show($id)
     {
         $user = $this->user->find($id);
-        //$user = $this->user->paginate();
-
         return view('admin.users.show', compact('user'));
     }
 
