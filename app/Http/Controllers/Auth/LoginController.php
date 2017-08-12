@@ -5,6 +5,7 @@ namespace SiGeEdu\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use SiGeEdu\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use SiGeEdu\Models\Administrator;
 
 class LoginController extends Controller
 {
@@ -60,6 +61,7 @@ class LoginController extends Controller
 
         $data = $request->only($this->username(), 'password');
         $data[$usernameKey] = $data[$this->username()];
+        $data['userable_type'] = Administrator::class;
         unset($data[$this->username()]);
 
         return $data;
