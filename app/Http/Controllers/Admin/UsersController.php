@@ -2,8 +2,10 @@
 
 namespace SiGeEdu\Http\Controllers\Admin;
 
+use FormBuilder;
 use Kris\LaravelFormBuilder\Form;
 use Illuminate\Http\Request;
+use Password;
 use SiGeEdu\Models\User;
 use SiGeEdu\Forms\UserForm;
 use SiGeEdu\Http\Controllers\Controller;
@@ -45,7 +47,7 @@ class UsersController extends Controller
     public function create()
     {
         /** @var Form $form */
-        $form = \FormBuilder::create(UserForm::class, [
+        $form = FormBuilder::create(UserForm::class, [
             'url'       => route('admin.users.store'),
             'method'    => 'POST'
         ]);
@@ -62,7 +64,7 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         /** @var Form $form */
-        $form = \FormBuilder::create(UserForm::class);
+        $form = FormBuilder::create(UserForm::class);
 
         if(!$form->isValid()){
             return redirect()
@@ -78,7 +80,7 @@ class UsersController extends Controller
         $password = $result['password'];
 
         if (isset($data['send_notification'])){
-            $token = \Password::broker()->createToken($user);
+            $token = Password::broker()->createToken($user);
             $user->notify(new UserCreated($token));
         }
 
@@ -130,7 +132,7 @@ class UsersController extends Controller
         $user = $this->user->find($id);
 
         /** @var Form $form */
-        $form = \FormBuilder::create(UserForm::class, [
+        $form = FormBuilder::create(UserForm::class, [
             'url'       => route('admin.users.update', ['user' => $user->id, 'page' => $currentPage]),
             'method'    => 'PUT',
             'model'     => $user
@@ -152,7 +154,7 @@ class UsersController extends Controller
         $user = $this->user->find($id);
 
         /** @var Form $form */
-        $form = \FormBuilder::create(UserForm::class, [
+        $form = FormBuilder::create(UserForm::class, [
             'data'      => ['id' => $user->id]
         ]);
 
