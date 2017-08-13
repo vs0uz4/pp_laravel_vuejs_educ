@@ -4,6 +4,7 @@ namespace SiGeEdu\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use SiGeEdu\Models\Administrator;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -25,6 +26,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        \Gate::define('administration', function($user){
+            return $user->userable instanceof Administrator;
+        });
     }
 }

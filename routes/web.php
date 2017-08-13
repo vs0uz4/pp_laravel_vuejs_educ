@@ -35,7 +35,16 @@ Route::group(['prefix' => 'admin'], function (){
         Route::post('password/reset',       'ResetPasswordController@reset');
     });
 
-    Route::group(['namespace'=>'Admin\\', 'as'=>'admin.', 'middleware'=>'auth'], function(){
+    // Administration Group Users Settings Routes...
+    Route::group(['prefix' => 'users', 'as' => 'admin.'], function (){
+        Route::group(['namespace' => 'Admin\\', 'as' => 'users.'], function (){
+           Route::get('settings',   'UserSettingsController@edit')->name('settings.edit');
+           Route::put('settings',   'UserSettingsController@update')->name('settings.update');
+        });
+    });
+
+    // Administration Group Routes...
+    Route::group(['namespace'=>'Admin\\', 'as'=>'admin.', 'middleware'=>['auth', 'can:administration']], function(){
         // Support Route...
         Route::get('/sysinfo', function(){
             return view('admin.systeminfo');

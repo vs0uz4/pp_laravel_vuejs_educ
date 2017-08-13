@@ -19,15 +19,24 @@
             $navbar = Navbar::withBrand('<span class=\'glyphicon glyphicon-education\'></span> ' . config('app.name'), route('admin.dashboard') );
 
             if(Auth::check()){
-                $links = [
-                    ['link' => route('admin.users.index'),  'title' => '<span class=\'glyphicon glyphicon-user\'></span> Users'],
-                    ['link' => route('admin.systeminfo'),   'title' => '<span class=\'glyphicon glyphicon-info-sign\'></span> System Info'],
-                ];
+                if(Gate::allows('administration')){
+                    $links = [
+                        ['link' => route('admin.users.index'),  'title' => '<span class=\'glyphicon glyphicon-user\'></span> Users'],
+                        ['link' => route('admin.systeminfo'),   'title' => '<span class=\'glyphicon glyphicon-info-sign\'></span> System Info'],
+                    ];
+
+                    $navbar->withContent(Navigation::links($links));
+                }
 
                 $linksRight = [
                     [
                         '<span class="glyphicon glyphicon-user"></span> ' . Auth::user()->name,
                         [
+                            [
+                                'link' => route('admin.users.settings.edit'),
+                                'title' => '<span class="glyphicon glyphicon-cog"></span> Settings',
+                            ],
+
                             [
                                 'link' => route('auth.logout'),
                                 'title' => '<span class="glyphicon glyphicon-log-out"></span> Logout',
@@ -40,8 +49,7 @@
                     ]
                 ];
 
-                $navbar->withContent(Navigation::links($links))
-                       ->withContent(Navigation::links($linksRight)
+                $navbar->withContent(Navigation::links($linksRight)
                        ->right());
 
                 $formLogout = FormBuilder::plain([
