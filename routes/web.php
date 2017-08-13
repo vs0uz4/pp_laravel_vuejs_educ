@@ -58,6 +58,10 @@ Route::group(['prefix' => 'admin'], function (){
         // Users Route..
         Route::group(['prefix' => 'users', 'as' => 'users.'], function(){
             Route::get('show_details', 'UsersController@showDetails')->name('show_details');
+            Route::group(['prefix' => '/{user}/profile'], function (){
+                Route::get('', 'UserProfileController@edit')->name('profile.edit');
+                Route::put('', 'UserProfileController@update')->name('profile.update');
+            });
         });
         Route::resource('users', 'UsersController');
     });

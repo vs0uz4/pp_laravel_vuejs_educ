@@ -30,15 +30,20 @@
 
                 $linksRight = [
                     [
-                        '<span class="glyphicon glyphicon-user"></span> ' . Auth::user()->name,
+                        '<span class="glyphicon glyphicon-chevron-right"></span> ' . Auth::user()->name,
                         [
                             [
-                                'link' => route('admin.users.settings.edit'),
+                                'link'  => route('admin.users.settings.edit'),
                                 'title' => '<span class="glyphicon glyphicon-cog"></span> Settings',
                             ],
 
                             [
-                                'link' => route('auth.logout'),
+                                'link'  => route('admin.users.profile.edit', ['user' => Auth::user()->id]),
+                                'title' => '<span class="glyphicon glyphicon-user"></span> My Profile',
+                            ],
+
+                            [
+                                'link'  => route('auth.logout'),
                                 'title' => '<span class="glyphicon glyphicon-log-out"></span> Logout',
                                 'linkAttributes' => [
                                     'onclick' => "event.preventDefault(); document.getElementById(\"form-logout\").submit();"

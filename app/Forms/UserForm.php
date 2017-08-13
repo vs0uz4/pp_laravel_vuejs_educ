@@ -17,19 +17,24 @@ class UserForm extends Form
         $id = $this->getData('id');
         $this
             ->add('name', 'text', [
+                'label' => 'Name',
                 'attr' => [
                     'placeholder' => 'Enter the name'
                 ],
                 'rules'=> 'required|max:255'
             ])
             ->add('email', 'email', [
+                'label' => 'Email',
                 'attr' => [
                     'placeholder' => 'Enter the e-mail'
                 ],
                 'rules'=> 'required|max:255|unique:users,email,' . $id
             ])
             ->add('type', 'select', [
-                'label' => 'Tipo de Usuário',
+                'label' => 'Type of User',
+                'attr' =>[
+                    'placeholder' => 'Select type of user'
+                ],
                 'choices' => $this->roles(),
                 'rules' => 'required|in:1,2,3'. implode(',', array_keys($this->roles()))
             ])
