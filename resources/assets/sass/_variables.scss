@@ -25,6 +25,7 @@ $text-color: #636b6f;
 
 // Navbar
 $navbar-default-bg: #fff;
+$nav-tabs-active-link-hover-bg: #fff;
 
 // Buttons
 $btn-default-color: $text-color;
@@ -37,6 +38,7 @@ $input-color-placeholder: lighten($text-color, 30%);
 // Panels
 $panel-default-heading-bg: #fff;
 $panel-default-text: #636b6f;
+$panel-default-slot-padding-top: 15px;
 
 // Tables
 $table-margin-top: 10px !default;

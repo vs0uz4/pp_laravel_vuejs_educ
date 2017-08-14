@@ -5,7 +5,7 @@
         <div class="row">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3><span class="glyphicon glyphicon-user"></span> Edit User Profile</h3>
+                    <h3><span class="glyphicon glyphicon-user"></span> Edit User Password</h3>
                 </div>
                 <div class="panel-body">
                     {!!

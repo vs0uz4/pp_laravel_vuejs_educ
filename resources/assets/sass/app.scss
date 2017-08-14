@@ -8,6 +8,11 @@
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
+// Panel with Tabs - Slot Padding
+.tab-panel-slot {
+  padding-top: $panel-default-slot-padding-top;
+}
+
 // Table margin-top
 .table {
   margin-top: $table-margin-top;
