@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use SiGeEdu\Models\User;
+use SiGeEdu\Models\UserProfile;
 
 class AdminsTableSeeder extends Seeder
 {
@@ -18,6 +19,10 @@ class AdminsTableSeeder extends Seeder
             'enrolment' => '100001'
         ])->each(function(User $user){
             if (!$user->userable) {
+                // Create Faker User Profiles
+                $profile = factory(UserProfile::class)->make();
+                $user->profile()->create($profile->toArray());
+                // Assign Role for user
                 User::assignRole($user, User::ROLE_ADMIN);
                 $user->save();
             }
@@ -29,6 +34,10 @@ class AdminsTableSeeder extends Seeder
             'enrolment' => '100002'
         ])->each(function(User $user){
             if (!$user->userable) {
+                // Create Faker User Profiles
+                $profile = factory(UserProfile::class)->make();
+                $user->profile()->create($profile->toArray());
+                // Assign Role for user
                 User::assignRole($user, User::ROLE_ADMIN);
                 $user->save();
             }
