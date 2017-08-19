@@ -40,3 +40,9 @@ $factory->define(\SiGeEdu\Models\UserProfile::class, function (Faker\Generator $
     ];
 });
 
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(\SiGeEdu\Models\Subject::class, function (Faker\Generator $faker) {
+   return [
+       'name' => $faker->word,
+   ];
+});

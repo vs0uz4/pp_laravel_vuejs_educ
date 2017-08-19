@@ -22,6 +22,7 @@
                 if(Gate::allows('administration')){
                     $links = [
                         ['link' => route('admin.users.index'),  'title' => '<span class=\'glyphicon glyphicon-user\'></span> Users'],
+                        ['link' => route('admin.subjects.index'), 'title' => '<span class=\'glyphicon glyphicon-list-alt\'></span> Subjects'],
                         ['link' => route('admin.systeminfo'),   'title' => '<span class=\'glyphicon glyphicon-info-sign\'></span> System Info'],
                     ];
 
