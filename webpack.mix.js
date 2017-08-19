@@ -1,5 +1,6 @@
 const { mix } = require('laravel-mix')
 const webpack = require('webpack')
+const LiveReloadPlugin = require('webpack-livereload-plugin')
 
 /*
  |--------------------------------------------------------------------------
@@ -20,6 +21,7 @@ const webpack = require('webpack')
  */
 mix.webpackConfig({
     plugins: [
+        new LiveReloadPlugin(),
         new webpack.ProvidePlugin({
             $: "jquery",
             jQuery: "jquery"
