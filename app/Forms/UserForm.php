@@ -15,6 +15,7 @@ class UserForm extends Form
     public function buildForm()
     {
         $id = $this->getData('id');
+        $type = $this->getModel()?$this->getModel()->userable_type:null;
         $this
             ->add('name', 'text', [
                 'label' => 'Name',
@@ -36,7 +37,14 @@ class UserForm extends Form
                     'placeholder' => 'Select type of user'
                 ],
                 'choices' => $this->roles(),
-                'rules' => 'required|in:1,2,3'. implode(',', array_keys($this->roles()))
+                'rules' => 'required|in:1,2,3'. implode(',', array_keys($this->roles())),
+                'selected' => function() use ($type) {
+                    if ($type){
+                        $type = explode('\\', $type )[2];
+                        $type_selected = implode('', array_keys($this->roles(), $type));
+                        return $type_selected;
+                    }
+                }
             ])
             ->add('send_notification', 'checkbox', [
                 'label' => 'Send welcome notification e-mail',

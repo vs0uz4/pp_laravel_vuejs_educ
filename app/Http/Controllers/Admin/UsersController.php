@@ -6,6 +6,7 @@ use FormBuilder;
 use Kris\LaravelFormBuilder\Form;
 use Illuminate\Http\Request;
 use Password;
+use function PHPSTORM_META\type;
 use SiGeEdu\Models\User;
 use SiGeEdu\Forms\UserForm;
 use SiGeEdu\Http\Controllers\Controller;
@@ -166,6 +167,13 @@ class UsersController extends Controller
         }
 
         $data = $form->getFieldValues();
+
+        if ( $this->typeChanged($data, $user) ){
+            $user->userable()->delete();
+        }
+
+        $user->assignEnrolment($user, $data['type']);
+        $user->assignRole($user, $data['type']);
         $user->update($data);
 
         flash('User changed with success!')->success()->important();
@@ -185,5 +193,24 @@ class UsersController extends Controller
 
         flash('User deleted with success!')->success()->important();
         return redirect()->route('admin.users.index');
+    }
+
+    /**
+     * Checks if the 'type' field has changed.
+     *
+     * @param array $data
+     * @param User $user
+     * @return bool
+     */
+    private function typeChanged(array $data, User $user)
+    {
+        $types = [
+            User::ROLE_ADMIN   => \SiGeEdu\Models\Administrator::class,
+            User::ROLE_TEACHER => \SiGeEdu\Models\Teacher::class,
+            User::ROLE_STUDENT => \SiGeEdu\Models\Student::class,
+        ];
+
+        $result = ($data['type'] <> implode('', array_keys($types, $user->userable_type))) ? true : false;
+        return $result;
     }
 }
