@@ -136,7 +136,7 @@ class SubjectsController extends Controller
         $subject = $this->subjectModel->find($id);
         $subject->delete();
 
-        flash('User deleted with success!')->success()->important();
+        flash('Subject deleted with success!')->success()->important();
         return redirect()->route('admin.subjects.index');
     }
 }
