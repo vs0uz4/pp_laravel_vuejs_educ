@@ -8,6 +8,24 @@
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
+// Remove left/right padding col-* Bootstrap
+@media (min-width: $screen-md-min) {
+  .no-padding-left {
+    padding-left: 0;
+  }
+
+  .no-padding-right {
+    padding-right: 0;
+  }
+}
+
+@media (min-width: $screen-xs-min) and (max-width: $screen-sm-max) {
+  form > div[class*="col-"] {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
 // Panel with Tabs - Slot Padding
 .tab-panel-slot {
   padding-top: $panel-default-slot-padding-top;

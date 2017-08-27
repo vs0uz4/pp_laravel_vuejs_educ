@@ -8301,6 +8301,23 @@ button.close {
   }
 }
 
+@media (min-width: 992px) {
+  .no-padding-left {
+    padding-left: 0;
+  }
+
+  .no-padding-right {
+    padding-right: 0;
+  }
+}
+
+@media (min-width: 480px) and (max-width: 991px) {
+  form > div[class*="col-"] {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
 .tab-panel-slot {
   padding-top: 15px;
 }

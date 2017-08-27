@@ -46,3 +46,14 @@ $factory->define(\SiGeEdu\Models\Subject::class, function (Faker\Generator $fake
        'name' => $faker->word,
    ];
 });
+
+$factory->define(\SiGeEdu\Models\ClassInformations::class, function (Faker\Generator $faker){
+    return [
+        'date_start' => $faker->date(),
+        'date_end' => $faker->date(),
+        'cycle' => rand(1,8),
+        'subdivision' => rand(1,16),
+        'semester' => rand(1,2),
+        'year' => rand(2017, 2030),
+    ];
+});

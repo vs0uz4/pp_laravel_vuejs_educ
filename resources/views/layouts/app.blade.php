@@ -23,6 +23,7 @@
                     $links = [
                         ['link' => route('admin.users.index'),  'title' => '<span class=\'glyphicon glyphicon-user\'></span> Users'],
                         ['link' => route('admin.subjects.index'), 'title' => '<span class=\'glyphicon glyphicon-list-alt\'></span> Subjects'],
+                        ['link' => route('admin.class_informations.index'), 'title' => '<span class=\'glyphicon glyphicon-blackboard\'></span> Class Informations'],
                         ['link' => route('admin.systeminfo'),   'title' => '<span class=\'glyphicon glyphicon-info-sign\'></span> System Info'],
                     ];
 

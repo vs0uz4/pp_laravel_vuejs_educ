@@ -67,6 +67,9 @@ Route::group(['prefix' => 'admin'], function (){
 
         // Subjects Route...
         Route::resource('subjects', 'SubjectsController');
+
+        // Class Informations Route...
+        Route::resource('class_informations', 'ClassInformationsController');
     });
 
 });
