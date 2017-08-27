@@ -93,10 +93,6 @@
     <script src="{{ asset('js/vendor.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
 
-    <script>
-        //$('#flash-overlay-modal').modal();
-    </script>
-
     @if(config('app.env') == 'local')
         <script src="http://localhost:35729/livereload.js"></script>
     @endif

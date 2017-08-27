@@ -1,5 +1,4 @@
 const { mix } = require('laravel-mix')
-const webpack = require('webpack')
 const LiveReloadPlugin = require('webpack-livereload-plugin')
 
 /*
@@ -21,11 +20,7 @@ const LiveReloadPlugin = require('webpack-livereload-plugin')
  */
 mix.webpackConfig({
     plugins: [
-        new LiveReloadPlugin(),
-        new webpack.ProvidePlugin({
-            $: "jquery",
-            jQuery: "jquery"
-        })
+        new LiveReloadPlugin()
     ]
 })
 
@@ -33,4 +28,3 @@ mix.sass('resources/assets/sass/app.scss', 'public/css')
 
 mix.js('resources/assets/js/app.js', 'public/js')
     .sourceMaps()
-    .extract(['jquery', 'bootstrap-sass'])
