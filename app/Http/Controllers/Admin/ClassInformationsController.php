@@ -5,7 +5,7 @@ namespace SiGeEdu\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use Kris\LaravelFormBuilder\FormBuilder;
 use SiGeEdu\Http\Controllers\Controller;
-use SiGeEdu\Models\ClassInformations;
+use SiGeEdu\Models\ClassInformation;
 use SiGeEdu\Forms\ClassInformationsForm;
 
 class ClassInformationsController extends Controller
@@ -16,10 +16,10 @@ class ClassInformationsController extends Controller
     /**
      * ClassInformationsController constructor.
      *
-     * @param ClassInformations $classinformation
+     * @param ClassInformation $classinformation
      * @param FormBuilder $formBuilder
      */
-    public function __construct(ClassInformations $classinformation, FormBuilder $formBuilder)
+    public function __construct(ClassInformation $classinformation, FormBuilder $formBuilder)
     {
         $this->classInformationModel = $classinformation;
         $this->formBuilder = $formBuilder;

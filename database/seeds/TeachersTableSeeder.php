@@ -13,7 +13,7 @@ class TeachersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(User::class, 10)->create()->each(function (User $user){
+        factory(User::class, 100)->create()->each(function (User $user){
             if (!$user->userable){
                 // Create Faker User Profiles
                 $profile = factory(UserProfile::class)->make();

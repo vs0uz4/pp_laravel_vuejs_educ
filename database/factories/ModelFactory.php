@@ -47,7 +47,7 @@ $factory->define(\SiGeEdu\Models\Subject::class, function (Faker\Generator $fake
    ];
 });
 
-$factory->define(\SiGeEdu\Models\ClassInformations::class, function (Faker\Generator $faker){
+$factory->define(\SiGeEdu\Models\ClassInformation::class, function (Faker\Generator $faker){
     return [
         'date_start' => $faker->date(),
         'date_end' => $faker->date(),
